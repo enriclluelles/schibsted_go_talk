@@ -1,2 +1,3 @@
 tags
-public/bundle.js
+examples/socketchat/public/bundle.js
+.env

@@ -1,0 +1,154 @@
+Go, a primer
+
+Enric Lluelles
+
+@enriclluelles
+enric@lluell.es
+
+* go
+
+- Created at Google, but developed in the open
+- Brainchild of Unix pioneers Rob Pike and Ken Thompson 
+- Natively compiled, 100% static libraries
+- General purpose but focused on servers and systems
+
+
+.image img/gopher.png
+
+* Projects using it
+
+- Vitess(youtube)
+- Docker(docker)
+- Etcd, Fleet(coreos)
+- Kubernetes(google)
+- Heka(mozilla)
+- Prometheus, Roshi(soundcloud)
+- Juju(canonical)
+- NSQ(bitly)
+- Consul, Packer, Terraform, Vault, Nomad(hashicorp)
+
+And many many more
+
+* Strong points
+
+- Minimal semantics
+- Easy to read
+- Easy and fast to compile
+- Garbage collected
+- Well performant
+- Native execution, no VM
+- Builtin concurrency model (CSP)
+
+* Types and objects
+
+- basic types
+	int, uint, int8, uint8, ...
+	bool, string
+	float32, float64
+	complex64, complex128
+
+- slices and arrays
+	
+	[]int, [3]string, []struct{ Name string }
+
+* Simple examples
+
+.play code/code1.go
+
+* Go types 2
+
+- structs
+
+	struct {
+		Name string
+		Age  int
+	}
+
+- functions
+
+  func(i int, j int) int, error
+
+* Simple examples 2
+
+.play code/code2.go /start/,/end/
+
+* Go types 3
+
+- maps
+
+	map[string]int
+
+- types
+
+  type MyType struct {
+    MyAttr1 string
+    MyAttr2 string
+  }
+
+  type Number float64
+
+- pointers
+
+  mypointer *MyType
+
+* Simple examples 3
+
+.code code/code3.go /start contact/,/end contact/
+
+* Simple examples 4
+
+.play code/code3.go /start main/,/end main/
+
+* Simple examples 5
+
+.play code/code4.go /start main/,/end main/
+
+* Interfaces
+
+Interfaces are a way to specify behaviour, contract fulfillment, just like in Java and C#
+
+But unlike in those languages, they're satisfied implicitly
+
+No implements, no extends keywords
+
+.code code/interfaces.go /start def/,/end def/
+
+* Interfaces 2
+
+.code code/interfaces.go /start main/,/end main/
+
+* Interfaces 3
+
+The empty interface, all types satisfy it.
+
+It's like Object in Java where all types are a subtype of it.
+
+.code code/interfaces.go /start a/,/end a/
+.code code/interfaces.go /start b/,/end b/
+
+* Interfaces 4
+
+Type assertion
+
+.code code/interfaces.go /start a/,/end a/
+.code code/interfaces.go /start c/,/end c/
+
+* Comparing to java
+
+Java has more of everything
+
+- Java has classes, go does not
+- Java has access modifiers, go does not
+- Java has method overloading, go does not
+- Java has inheritance, go does not
+- Java has generics, go does not
+
+Go language designers argue that these are assets, not hindrances
+
+* Concurrency
+
+The channel type:
+
+  chan int
+  chan string
+  chan *MyType

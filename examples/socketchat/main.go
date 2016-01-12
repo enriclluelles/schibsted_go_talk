@@ -14,7 +14,18 @@ var key = flag.String("key", "./misc/key.pem", "key")
 
 func main() {
 	flag.Parse()
-	s := wsserver.NewServer()
+	h := wsserver.WsHandlers{
+		Msg: func(msg []byte, conn *wsserver.Connection, broadcast chan []byte, Connections map[*wsserver.Connection]bool) {
+			broadcast <- msg
+		},
+		Connect: func(conn *wsserver.Connection) {
+			log.Println("connecting")
+		},
+		Disconnect: func(conn *wsserver.Connection) {
+			log.Println("disconnecting")
+		},
+	}
+	s := wsserver.NewServer(h)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.Handle("/ws", s)
 	err := http.ListenAndServeTLS(*addr, *cert, *key, nil)
