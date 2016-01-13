@@ -147,8 +147,78 @@ Go language designers argue that these are assets, not hindrances
 
 * Concurrency
 
-The channel type:
+The channel type, you send stuff to it an receive it afterwards
 
-  chan int
-  chan string
-  chan *MyType
+It blocks when sending
+
+.play code/channels.go /start main/,/end main/
+
+* Make?
+
+The [[https://golang.org/ref/spec#Making_slices_maps_and_channels][make]] operator is used to create some builtin types
+
+.play code/make.go /start main/,/end main/
+
+As opposed to new, which is used for your own types
+
+* Concurrency 2
+
+A channel also blocks when receiving
+
+.play code/channels2.go /start main/,/end main/
+
+* Pokemon
+
+.code code/pokemon/pokemon.go /start pokemon_type/,/end pokemon_type/
+
+.code code/pokemon/pokemon.go /start pokemon_print/,/end pokemon_print/
+
+* Pokemon 2
+
+.code code/pokemon/pokemon.go /start pokemon_get/,/end pokemon_get/
+
+* Pokemon 3
+
+.play code/concurrent_fetch.go /start main/,/end main/
+
+* Pokemon 4
+
+.play code/concurrent_fetch2.go /start main/,/end main/
+
+* Pokemon 5
+
+.play code/concurrent_fetch3.go /start main/,/end main/
+
+* Pokemon 6
+
+.play code/concurrent_fetch4.go /start main/,/end main/
+
+* Pokemon 7
+
+.play code/concurrent_fetch5.go /start main/,/end main/
+
+* Environment
+
+GOPATH, don't fight it
+
+* Dependency management
+
+.image img/here_be_dragons.jpg
+
+* Dependency management
+
+An unsolved problem(till now!)
+
+Language designers chose to not get involved with it...
+
+Tools appeared in the wild:
+
+- Godep
+- Glide
+- ...
+
+But in the end they did
+
+GO15VENDOREXPERIMENT
+
+
