@@ -215,10 +215,11 @@ Tools appeared in the wild:
 
 - Godep
 - Glide
+- Gb
 - ...
 
 But in the end they did
 
 GO15VENDOREXPERIMENT
 
-
+* Type system complaints

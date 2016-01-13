@@ -1,0 +1,48 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Index</title>
+
+  <style type="text/css" media="all">
+    #messages {list-style-type: none}
+    .who, .what {display: inline-block}
+    .what { margin-left: 5px }
+  </style>
+</head>
+<body>
+  <ul id="messages">
+  </ul>
+  <input id="messageBox" type="text" name="message"/>
+  <script type="text/javascript" charset="utf-8">
+    var source = new EventSource("/events");
+
+    var messageList = document.querySelector("#messages");
+    var messageBox = document.querySelector("#messageBox");
+    var who = "";
+
+    window.addEventListener("load", function () {
+        while (!who || who == "") {
+          who = window.prompt("Please enter you name");
+        }
+    });
+
+    source.addEventListener("said", function (e) {
+        console.log(e.data);
+        var data = JSON.parse(e.data),
+        who = data.Who,
+        what = data.What;
+        messageList.innerHTML += "<li><span class=\"who\">" + who + ":</span><span class=\"what\">" + what + "</span></li>"
+    });
+
+    messageBox.addEventListener("keydown", function (e) {
+        if (e.keyCode == 13) {
+          var request = new XMLHttpRequest();
+          request.open('post', '/message', true);
+          request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+          request.send("who=" + who + "&what=" + messageBox.value)
+          messageBox.value = "";
+        }
+    });
+</script>
+</body>
+</html>
